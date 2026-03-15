@@ -1,68 +1,301 @@
+/* Google Sans Flex is imported via JS using @fontsource/google-sans-flex */
+
+:root {
+  /* Material 3 style colors (primary brand + tonal variants for surfaces and buttons) */
+  --md-sys-color-primary: #6750a4;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-primary-container: #eaddff;
+  --md-sys-color-on-primary-container: #21005d;
+
+  --md-sys-color-secondary: #625b71;
+  --md-sys-color-on-secondary: #ffffff;
+  --md-sys-color-secondary-container: #e8def8;
+  --md-sys-color-on-secondary-container: #1d192b;
+
+  /* Surface / background colors used for cards, page background, etc. */
+  --md-sys-color-surface: #fdf8ff;
+  --md-sys-color-surface-variant: #e7e0ec;
+  --md-sys-color-background: #fdf8ff;
+  --md-sys-color-outline: #79747e;
+  --md-sys-color-error: #b3261e;
+  --md-sys-color-on-surface: #1d1b20;
+  --md-sys-color-on-surface-variant: #49454f;
+
+  /* Shape tokens for rounded corners */
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-small: 8px;
+
+  /* Elevation token for low-level shadows (cards, navbar) */
+  --md-elevation-level1: 0 1px 3px rgba(0, 0, 0, 0.14),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+
+  /* Typography tokens (brand and plain use Google Sans Flex) */
+  --md-ref-typeface-brand: "Google Sans Flex", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --md-ref-typeface-plain: "Google Sans Flex", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+  /* Type scales for body, labels and titles */
+  --md-sys-typescale-body: 0.94rem;
+  --md-sys-typescale-label: 0.8rem;
+  --md-sys-typescale-title: 1rem;
+}
+
+/* Map Bootstrap's primary color to the M3 primary token so buttons, links, etc. match */
+:root,
+[data-bs-theme="light"] {
+  --bs-primary: var(--md-sys-color-primary);
+  --bs-primary-rgb: 103, 80, 164;
+}
+
+/* Global reset: normalise box model and remove default margins/padding */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Base typography for the whole app */
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background-color: #f5f5f5;
+  font-family: var(--md-ref-typeface-plain);
+  background-color: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-surface);
 }
 
-/* Layout for content under fixed navbar */
+/* Headline styles, approximating M3 headline/ title hierarchy */
+h1,
+.h1 {
+  font-family: var(--md-ref-typeface-brand);
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+h2,
+.h2 {
+  font-family: var(--md-ref-typeface-brand);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Smaller heading commonly used inside cards, lists, etc. */
+.h5 {
+  font-weight: 600;
+}
+
+/* Main app content area below the fixed navbar */
 .app-content {
-  padding-top: 70px;
+  padding-top: 72px; /* space for fixed navbar */
+  padding-left: 0; /* horizontal alignment handled by inner Container */
+  padding-right: 0;
+  padding-bottom: 1.5rem;
+}
+
+/* Add a bit of space between navbar and the first page title */
+.app-content h1:first-of-type {
+  margin-top: 0.75rem;
+}
+
+/* Make navbar content horizontally align with page content Container */
+.navbar > .container,
+.navbar > .container-fluid {
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-/* Calendar layout */
+/* Cards styled as M3 surfaces (for Home, Help, event list, etc.) */
+.card {
+  border-radius: var(--md-sys-shape-corner-medium);
+  border: 1px solid var(--md-sys-color-surface-variant);
+  box-shadow: var(--md-elevation-level1);
+  background-color: var(--md-sys-color-surface);
+}
+
+/* Alerts with slightly softer corners to match text-field shape */
+.alert {
+  border-radius: var(--md-sys-shape-corner-small);
+}
+
+/* Navbar gets a subtle elevation to separate it from the content */
+.navbar {
+  box-shadow: var(--md-elevation-level1);
+}
+
+/* Brand icon in navbar uses the primary color */
+.navbar-dark .navbar-brand .brand-icon {
+  color: var(--md-sys-color-primary);
+}
+
+/* Form labels styled like M3 label text */
+.form-label {
+  font-size: var(--md-sys-typescale-label);
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Inputs and selects styled closer to M3 text fields */
+.form-control,
+.form-select,
+textarea.form-control {
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline);
+  font-size: var(--md-sys-typescale-body);
+}
+
+/* Focus state for form controls: colored outline using primary */
+.form-control:focus,
+.form-select:focus,
+textarea.form-control:focus {
+  border-color: var(--md-sys-color-primary);
+  box-shadow: 0 0 0 1px var(--md-sys-color-primary);
+}
+
+/* Buttons styled like M3 filled & tonal buttons */
+
+/* Filled button (primary) – used for main actions */
+.btn-primary {
+  border-radius: 999px; /* pill shape */
+  font-weight: 500;
+  padding-inline: 1.25rem;
+  padding-block: 0.5rem;
+  background-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  border-color: var(--md-sys-color-primary);
+  box-shadow: none;
+}
+
+/* Hover and focus styles for filled button */
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background-color: #58408f; /* slightly darker primary */
+  border-color: #58408f;
+}
+
+/* Tonal button (mapped to outline-secondary) – for secondary actions */
+.btn-outline-secondary {
+  border-radius: 999px;
+  font-weight: 500;
+  padding-inline: 1.25rem;
+  padding-block: 0.5rem;
+  background-color: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: transparent;
+}
+
+/* Hover/focus for tonal button */
+.btn-outline-secondary:hover,
+.btn-outline-secondary:focus-visible {
+  background-color: #cec2ff; /* slightly darker tonal container */
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+/* Outlined buttons (danger, primary) – used for less prominent actions */
+.btn-outline-danger,
+.btn-outline-primary {
+  border-radius: 999px;
+  font-weight: 500;
+  padding-inline: 1.25rem;
+  padding-block: 0.5rem;
+}
+
+/* Disabled states: low-contrast neutrals as recommended by M3 */
+.btn:disabled,
+.btn.disabled {
+  background-color: rgba(29, 27, 32, 0.12); /* on-surface at ~12% */
+  color: rgba(29, 27, 32, 0.38); /* on-surface at ~38% */
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Disabled outlined / tonal variants – lighter surface with subtle border */
+.btn-outline-primary:disabled,
+.btn-outline-primary.disabled,
+.btn-outline-secondary:disabled,
+.btn-outline-secondary.disabled,
+.btn-outline-danger:disabled,
+.btn-outline-danger.disabled {
+  background-color: rgba(29, 27, 32, 0.04);
+  color: rgba(29, 27, 32, 0.38);
+  border-color: rgba(29, 27, 32, 0.12);
+}
+
+/* Calendar layout: 7-column grid (Mon–Sun) */
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 4px;
 }
 
+/* Calendar cells styled as small M3 cards */
 .calendar-cell {
-  min-height: 70px;
-  border: 1px solid #dee2e6;
-  border-radius: 4px;
-  padding: 4px;
-  background-color: #fff;
-  font-size: 0.75rem;
+  min-height: 80px;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid transparent;
+  background-color: var(--md-sys-color-surface);
+  font-size: 0.8rem;
   position: relative;
+  padding: 4px;
+  text-align: left;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    transform 120ms ease;
 }
 
+/* Hover state for calendar cells */
+.calendar-cell:hover {
+  background-color: var(--md-sys-color-surface-variant);
+  border-color: var(--md-sys-color-outline);
+  cursor: pointer;
+}
+
+/* Today’s date highlighted with a primary-colored border */
 .calendar-cell-today {
-  border-color: #0d6efd;
+  border-color: var(--md-sys-color-primary);
 }
 
+/* Calendar weekday header row (Mon, Tue, etc.) */
 .calendar-cell-header {
   text-align: center;
   font-weight: 600;
   margin-bottom: 4px;
+  font-size: 0.8rem;
+  color: var(--md-sys-color-on-surface-variant);
 }
 
+/* Selected date cell gets a subtle elevation */
+.calendar-cell.border-primary {
+  box-shadow: var(--md-elevation-level1);
+}
+
+/* Small event pill inside calendar cells (shows count/label) */
 .calendar-event {
-  display: block;
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background-color: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
   font-size: 0.7rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Dashboard layout: calendar + events */
+/* Dashboard layout: calendar + event list side-by-side on desktop */
 @media (min-width: 768px) {
   .dashboard-layout {
     display: grid;
     grid-template-columns: 2fr 1.2fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 }
 
+/* Dashboard layout: stacked vertically on smaller screens */
 @media (max-width: 767.98px) {
   .dashboard-layout {
     display: flex;
     flex-direction: column;
+    gap: 1.25rem;
   }
 }

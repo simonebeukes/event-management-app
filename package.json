@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/google-sans-flex": "^5.2.2",
     "bootstrap": "^5.3.8",
     "formik": "^2.4.9",
     "react": "^19.2.4",

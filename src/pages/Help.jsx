@@ -1,16 +1,20 @@
 import { Container } from "react-bootstrap";
 import Accordion from "react-bootstrap/Accordion";
 
+// Help & support page:
 const Help = () => {
   return (
     <Container>
+      {/* Page title and intro text */}
       <h1 className="mb-3">Help &amp; support</h1>
       <p className="mb-4">
         This page explains how to register, log in, navigate the app, and manage
         your events effectively.
       </p>
-
+        
+      {/* Accordion component, allows multiple sections to stay expanded at once */}
       <Accordion alwaysOpen>
+        {/* Section 1: basic navigation*/}
         <Accordion.Item eventKey="0">
           <Accordion.Header>Getting started &amp; navigation</Accordion.Header>
           <Accordion.Body>
@@ -40,6 +44,7 @@ const Help = () => {
           </Accordion.Body>
         </Accordion.Item>
 
+        {/* Section 2: how to register and log in */}
         <Accordion.Item eventKey="1">
           <Accordion.Header>
             Registering and logging into your account
@@ -86,6 +91,7 @@ const Help = () => {
           </Accordion.Body>
         </Accordion.Item>
 
+        {/* Section 3: creating, editing and deleting events */}
         <Accordion.Item eventKey="2">
           <Accordion.Header>Creating and editing events</Accordion.Header>
           <Accordion.Body>
@@ -156,6 +162,7 @@ const Help = () => {
           </Accordion.Body>
         </Accordion.Item>
 
+        {/* Section 4: general tips for using the app */}
         <Accordion.Item eventKey="3">
           <Accordion.Header>Tips for organising events</Accordion.Header>
           <Accordion.Body>
